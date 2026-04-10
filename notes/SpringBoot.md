@@ -40,6 +40,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }
 ```
 
@@ -79,7 +80,7 @@ public class AuthController {
 
 ---
 
-## 🧠 How it works
+## How it works
 
 1. User sends username + password
 2. `AuthenticationManager` verifies credentials
@@ -91,9 +92,9 @@ public class AuthController {
 
 ---
 
-## 👤 UserDetailsService (Important)
+## UserDetailsService
 
-Spring needs a way to fetch users from DB:
+Spring will need a way to fetch users from DB:
 
 ```java
 @Service
@@ -109,9 +110,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 ---
 
-## 🔒 Password Encoding
+## Password Encoding
 
-Never store plain passwords:
+passwords are never stored as plain text
 
 ```java
 @Bean
@@ -120,89 +121,10 @@ public PasswordEncoder passwordEncoder() {
 }
 ```
 
----
-
-## 🔗 AuthenticationManager Bean
-
-Needed for manual login:
-
-```java
-@Bean
-public AuthenticationManager authenticationManager(
-        AuthenticationConfiguration config) throws Exception {
-    return config.getAuthenticationManager();
-}
-```
-
----
-
-## 🚫 Disable Default Features (Common)
-
-```java
-http
-    .csrf().disable()
-    .formLogin().disable()
-    .httpBasic().disable();
-```
-
----
-
-## 🧱 Roles & Authorization Example
-
-```java
-.authorizeHttpRequests(auth -> auth
-    .requestMatchers("/admin/**").hasRole("ADMIN")
-    .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-    .anyRequest().authenticated()
-)
-```
-
----
-
-## 🔄 Typical Flow (Real App)
-
-1. User registers → password encoded
-2. User logs in → authenticated
-3. Server generates JWT
-4. Client stores token
-5. Every request → token verified
-
----
-
-## ⚡ Common Mistakes
-
-- ❌ Forgetting password encoder
-- ❌ Not exposing AuthenticationManager
-- ❌ Using default login unintentionally
-- ❌ Not permitting auth routes
-- ❌ Mixing session + JWT incorrectly
-
----
-
-## 🧪 What You Should Practice
+## todo
 
 - Build login endpoint
 - Connect to database (JPA)
 - Add JWT generation
 - Protect routes with roles
 - Test with Postman
-
----
-
-## 💡 Simple Mental Model
-
-Think of Spring Security as:
-
-Request → Filter → Authentication → Authorization → Controller
-
----
-
-## 🏁 Summary
-
-- Spring Security handles auth + protection
-- You can override defaults
-- Custom login = manual authentication
-- JWT usually used in modern apps
-- Everything revolves around the filter chain
-
----
