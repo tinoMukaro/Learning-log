@@ -29,12 +29,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
+            .csrf(customizer -> customizer.disable)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .formLogin().disable(); // disable default login
+            .formLogin(Customizer.withDefaults())
+            .httpBasic(Customizer.withDefaults())
+            .sessionManagement(session -> session.sessionCreationPolicy(sessionCreationPolicy.STATELESS));
 
         return http.build();
     }
@@ -42,9 +44,9 @@ public class SecurityConfig {
 ```
 
 this config:
-Disable default login form
+Disable default csrf
 Define public vs protected routes
-Customize behavior
+Customize behavior on login form and for apis like postman to work
 
 ## 🔑 Custom Login (Manual Authentication)
 
