@@ -1,4 +1,4 @@
-## spring security
+# spring security
 
 ## What is Spring Security?
 
@@ -128,3 +128,5 @@ public PasswordEncoder passwordEncoder() {
 - Add JWT generation
 - Protect routes with roles
 - Test with Postman
+
+## encryoting passwords
