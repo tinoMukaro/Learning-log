@@ -110,17 +110,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 ---
 
-## Password Encoding
-
-passwords are never stored as plain text
-
-```java
-@Bean
-public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-}
-```
-
 ## todo
 
 - Build login endpoint
@@ -129,4 +118,78 @@ public PasswordEncoder passwordEncoder() {
 - Protect routes with roles
 - Test with Postman
 
-## encryoting passwords
+## Password Encoding
+
+`plain password → hashed password`
+
+- Stored in database as a **hash**
+
+---
+
+### 🔑 Why BCrypt?
+
+- One-way hashing (cannot be reversed)
+- Automatically adds a **salt**
+- Same password ≠ same hash every time
+- Built into Spring Security
+
+---
+
+### Password Encoder Bean
+
+```java
+@Bean
+public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder(12);
+}
+```
+
+### Registering a User
+
+```java
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepo repo;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
+    public Users register(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return repo.save(user);
+    }
+}
+```
+
+## 🔐 Login / Authentication Flow
+
+```java
+encoder.matches(rawPassword, storedHashedPassword);
+```
+
+### Login Service
+
+```java
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest request) {
+
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                request.getUsername(),
+                request.getPassword()
+            )
+        );
+
+        return "Login successful";
+    }
+}
+```
