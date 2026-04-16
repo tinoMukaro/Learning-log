@@ -110,14 +110,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 ---
 
-## todo
-
-- Build login endpoint
-- Connect to database (JPA)
-- Add JWT generation
-- Protect routes with roles
-- Test with Postman
-
 ## Password Encoding
 
 `plain password → hashed password`
