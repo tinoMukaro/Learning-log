@@ -186,41 +186,18 @@ public class AuthController {
 }
 ```
 
-# 🔐 JWT (JSON Web Token) – Spring Security Notes
+# JWT (JSON Web Token)
 
-## 📌 What is JWT?
+## What is JWT?
 
 JWT (JSON Web Token) is a way to:
 
-- **Authenticate users without sessions**
-- Send **secure information between client and server**
+- Authenticate users without sessions
+- Send secure information between client and server
 
-👉 It is a **stateless authentication mechanism**
-
----
-
-## 🧠 Simple Idea
-
-Instead of:
-
-- Server storing session (JSESSIONID)
-
-We do:
-
-- Server gives client a **token**
-- Client sends token on every request
-
----
-
-## 📦 Structure of JWT
+## Structure of JWT
 
 A JWT has 3 parts:
-
-```
-HEADER.PAYLOAD.SIGNATURE
-```
-
----
 
 ### 1. Header
 
@@ -239,16 +216,6 @@ Contains user data (claims):
 - roles
 - expiry time
 
-Example:
-
-```json id="1k6k7r"
-{
-  "sub": "tino",
-  "role": "USER",
-  "exp": 1712345678
-}
-```
-
 ---
 
 ### 3. Signature
@@ -260,68 +227,11 @@ Example:
 
 ---
 
-## 🔄 JWT Flow in Spring Boot
-
-### 1. User Logs In
-
-- Sends username + password
-- Spring authenticates using:
-  - `AuthenticationManager`
-
----
-
-### 2. Generate JWT
-
-If authentication is successful:
-
-- Create token
-- Include user info
-
----
-
-### 3. Send Token to Client
-
-Example response:
-
-```json id="c5o0is"
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
----
-
-### 4. Client Stores Token
-
-Usually:
-
-- localStorage OR
-- httpOnly cookies
-
----
-
-### 5. Client Sends Token on Requests
-
-```http id="9k6r3h"
-Authorization: Bearer <token>
-```
-
----
-
-### 6. Server Validates Token
-
-- Extract token from header
-- Verify signature
-- Check expiry
-- Authenticate user
-
----
-
-## ⚙️ JWT Generation (Spring Example)
+## JWT Generation
 
 Using a utility class:
 
-```java id="v0qj6m"
+```java
 @Component
 public class JwtUtil {
 
@@ -340,9 +250,9 @@ public class JwtUtil {
 
 ---
 
-## 🔑 Using JWT in Login
+## Using JWT in Login
 
-```java id="b7u9xz"
+```java
 @PostMapping("/login")
 public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
@@ -359,25 +269,7 @@ public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 }
 ```
 
----
-
-## 🛡️ JWT Filter (Core Part)
-
-Purpose:
-
-- Intercepts every request
-- Validates token
-
-Steps:
-
-1. Read `Authorization` header
-2. Extract token
-3. Validate token
-4. Set authentication in context
-
----
-
-## ⚠️ Important Concepts
+## Important Concepts
 
 ### Stateless
 
@@ -397,48 +289,5 @@ Steps:
 
 - Used to sign token
 - Must be kept secure
-
----
-
-## 🚫 Common Mistakes
-
-- ❌ Storing sensitive data in payload
-- ❌ Not setting expiration
-- ❌ Weak secret key
-- ❌ Forgetting "Bearer " prefix
-- ❌ Not validating token on each request
-
----
-
-## ⚖️ JWT vs Session
-
-| Feature      | Session | JWT    |
-| ------------ | ------- | ------ |
-| Storage      | Server  | Client |
-| Scalability  | ❌      | ✅     |
-| Stateless    | ❌      | ✅     |
-| React/Mobile | ❌      | ✅     |
-
----
-
-## 🧠 Mental Model
-
-Login:
-→ verify user
-→ give token
-
-Requests:
-→ send token
-→ verify token
-
----
-
-## 🏁 Summary
-
-- JWT replaces sessions
-- Used for stateless authentication
-- Generated after login
-- Sent in Authorization header
-- Verified on every request
 
 ---
