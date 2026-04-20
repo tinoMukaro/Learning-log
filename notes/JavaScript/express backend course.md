@@ -1,6 +1,6 @@
 express backend course
 
-\*this course uses module not common js\*
+#### this course uses module not common js
 
 its a node library that's used to create a node.js server
 
@@ -88,7 +88,7 @@ thenjoin dirname with the dir of where you pages are usually public
 
 like this
 
-&nbsp;const \_\_filename = fileURLToPath(import.met.url) //this gets the file url
+const \_\_filename = fileURLToPath(import.met.url) //this gets the file url
 
 and file to path converts it to a path
 
@@ -108,7 +108,7 @@ app.use(express.static(path.join(\_\_dirname, '.. public')))
 
 app.get('/', (req, res)=>{
 
-&nbsp;res.sendFile(path.join(\_\_dirname, '..public','index.html')
+res.sendFile(path.join(\_\_dirname, '..public','index.html')
 
 })
 

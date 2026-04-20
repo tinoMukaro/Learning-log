@@ -102,3 +102,5 @@ console.log("ibvapa")
 break is to make the program stop when the case is found
 
 #### string methods
+
+## ES6+ FEATURES
