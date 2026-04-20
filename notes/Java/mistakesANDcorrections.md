@@ -35,3 +35,12 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/auth_db
 spring.datasource.url=jdbc:postgresql://localhost:2015/auth_db
 Lesson: Never assume default ports. Always verify what port your database is actually listening on.
 ```
+
+## 2. Spring Security still generating auto one-time password despite custom login
+
+Cause: Spring Boot's SecurityAutoConfiguration automatically creates a default in-memory user and generates a random password on startup when no explicit UserDetailsService is found.
+
+Solution: Exclude the auto-configuration completely:
+
+properties
+spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
