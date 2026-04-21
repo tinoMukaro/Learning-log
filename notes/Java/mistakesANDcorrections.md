@@ -44,3 +44,41 @@ Solution: Exclude the auto-configuration completely:
 
 properties
 spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+## 3. JWT Authentication Errors
+
+Error 1: ClassNotFoundException: javax.xml.bind.DatatypeConverter
+What happened: JJWT 0.9.1 tried to use a Java class that was removed in Java 9+
+Why: Old JJWT version incompatible with modern Java
+Fix: Upgrade JJWT to 0.11.5+ (uses java.util.Base64 instead)
+
+Error 2: ClassNotFoundException: io.jsonwebtoken.security.SecureRequest
+What happened: Mixed different JJWT versions (API 0.11.5 + IMPL 0.12.6)
+Why: API and IMPL versions must match exactly
+Fix: All three JJWT dependencies must be the SAME version
+
+```xml
+<!-- ALL must match -->
+jjwt-api:0.11.5
+jjwt-impl:0.11.5
+jjwt-jackson:0.11.5
+```
+
+Error 3: Circular Dependency in Spring Beans
+
+What happened: Beans referencing each other in a loop
+JwtAuthFilter → UserService → PasswordEncoder → SecurityConfig → JwtAuthFilter
+Why: Field injection + bean creation in multiple places
+Fix: Use constructor injection, don't create beans that already have @Component
+
+```java
+// BAD
+@Autowired
+private UserService userService;
+
+// GOOD
+private final UserService userService;
+public JwtAuthFilter(UserService userService) {
+    this.userService = userService;
+}
+```
