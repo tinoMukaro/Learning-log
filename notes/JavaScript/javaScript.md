@@ -104,3 +104,7 @@ break is to make the program stop when the case is found
 #### string methods
 
 ## ES6+ FEATURES
+
+1. arrow functions
+2. template literals
+3.
