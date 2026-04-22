@@ -505,6 +505,6 @@ to set a daemon thread
 
 **_thread.setDaemon(true)_**
 
-## lambda functions
-
 ## annotations
+
+## lambda function
