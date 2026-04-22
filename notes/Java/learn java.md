@@ -504,3 +504,7 @@ a daemon thread is a thread that ends when the main thread ends
 to set a daemon thread
 
 **_thread.setDaemon(true)_**
+
+## lambda functions
+
+## annotations
