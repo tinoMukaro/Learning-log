@@ -507,4 +507,208 @@ to set a daemon thread
 
 ## annotations
 
+## What are Annotations?
+
+Annotations are **metadata** added to Java code.
+They:
+
+- Don’t execute logic by themselves
+- Provide information to:
+  - Compiler
+  - Tools
+  - Frameworks
+  - Runtime (via reflection)
+
+example:
+
+```java
+@Override
+public String toString() {
+    return "User";
+}
+```
+
+This tells the compiler:
+“this method overrides a parent method”
+
+## Built-in Annotations
+
+### 1. @Override
+
+- Ensures method overrides a superclass method
+- Compile-time check
+
+### 2. @Deprecated
+
+```java
+@Deprecated
+public void oldMethod() {}
+```
+
+- Marks method as outdated
+- IDE shows warning
+
+### 3. @SuppressWarnings
+
+```java
+@SuppressWarnings("unchecked")
+```
+
+- Tells compiler to ignore warnings
+
+## Types of Annotations
+
+1. Marker Annotation (no values)
+
+```java
+@interface MyMarker {}
+```
+
+Usage:
+
+```java
+@MyMarker
+public class Test {}
+```
+
+2. Single Value Annotation
+
+```java
+@interface Author {
+    String value();
+}
+```
+
+Usage:
+
+```java
+@Author("Tino")
+```
+
+3. Full Annotation (multiple values)
+
+```java
+@interface Info {
+    String name();
+    int version();
+}
+```
+
+Usage:
+
+```java
+@Info(name = "App", version = 1)
+```
+
+## Creating Your Own Annotation
+
+Step 1: Define Annotation
+
+```java
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface LogExecutionTime {
+}
+```
+
+---
+
+## Important Meta-Annotations
+
+#### 1. @Retention
+
+Defines how long annotation is available
+
+- SOURCE → removed at compile
+- CLASS → in bytecode
+- RUNTIME → available via reflection
+
+---
+
+#### 2. @Target
+
+Defines where annotation can be used
+
+- METHOD
+- CLASS
+- FIELD
+- PARAMETER
+
+## Using Custom Annotation (with Reflection)
+
+Annotations don’t do anything unless you **process them**
+
+### Example Usage
+
+```java
+public class TestService {
+
+    @LogExecutionTime
+    public void serve() {
+        System.out.println("Running...");
+    }
+}
+```
+
+---
+
+### Processing the Annotation
+
+```java
+import java.lang.reflect.Method;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        TestService service = new TestService();
+
+        for (Method method : service.getClass().getDeclaredMethods()) {
+
+            if (method.isAnnotationPresent(LogExecutionTime.class)) {
+
+                long start = System.currentTimeMillis();
+
+                method.invoke(service);
+
+                long end = System.currentTimeMillis();
+
+                System.out.println("Execution time: " + (end - start));
+            }
+        }
+    }
+}
+```
+
+## What’s Happening
+
+1. Check if method has annotation
+2. If yes:
+   - Run extra logic (timing)
+
+3. Then execute method
+
+👉 This is how frameworks like Spring work internally
+
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+- Annotations ≠ logic
+- You must write code to **interpret them**
+- Usually done with:
+  - Reflection
+  - AOP (Spring)
+  - Annotation processors
+
+---
+
+## Real-World Usage
+
+Annotations are used for:
+
+- Dependency Injection (Spring)
+- ORM mapping (Hibernate)
+- Testing (JUnit)
+- Code generation
+
 ## lambda function
