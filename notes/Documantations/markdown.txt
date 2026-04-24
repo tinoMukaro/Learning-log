@@ -1,0 +1,69 @@
+🧾 Markdown Cheat Sheet
+1. Headings (structure everything)
+# H1 (Title)
+## H2 (Section)
+### H3 (Subsection)
+#### H4
+
+Rules:
+
+Only one # title per file
+Use ## for main sections (most common)
+2. Text formatting
+**bold**
+*italic*
+~~strikethrough~~
+
+3. Lists
+Bullet list
+- Item
+- Item
+  - Sub item
+Numbered list
+1. First
+2. Second
+3. Third
+4. Code (VERY IMPORTANT)
+Inline code
+Use `npm install`
+
+
+Code blocks
+```javascript
+console.log("Hello world");
+```
+
+👉 Use language names:
+
+js
+json
+bash
+python
+java
+5. Links
+[Google](https://google.com)
+6. Images
+![description](image_url)
+7. Horizontal line (divider)
+---
+8. Blockquotes (for notes or warnings)
+> This is important
+
+Result:
+
+This is important
+
+9. Tables
+| Name | Age |
+|------|-----|
+| Tino | 23  |
+10. Checklists (very useful on GitHub)
+- [x] Done
+- [ ] Not done
+11. Escaping characters
+
+If Markdown is interfering:
+
+\*not italic\*
+
+👉 Output: not italic
