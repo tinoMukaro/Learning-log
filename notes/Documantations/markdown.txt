@@ -1,4 +1,4 @@
-🧾 Markdown Cheat Sheet
+Markdown Cheat Sheet
 1. Headings (structure everything)
 # H1 (Title)
 ## H2 (Section)
@@ -33,7 +33,7 @@ Code blocks
 console.log("Hello world");
 ```
 
-👉 Use language names:
+language names:
 
 js
 json
@@ -60,10 +60,16 @@ This is important
 10. Checklists (very useful on GitHub)
 - [x] Done
 - [ ] Not done
-11. Escaping characters
 
-If Markdown is interfering:
+README Documentation this uses .md
 
-\*not italic\*
+This is the entry point of any project.
 
-👉 Output: not italic
+A good README explains:
+
+What the project does
+How to install/run it
+Tech stack
+Example usage
+
+Every project you push should have a clean README.
