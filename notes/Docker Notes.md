@@ -22,13 +22,13 @@ EXPOSE <port-number> - Indicates which ports the container will listen on
 
 USER <user-or-uid> - Sets the default user for subsequent instructions
 
-CMD \["<command>", "<arg1>"] - Sets the default command for the container (only one CMD per Dockerfile)
+CMD ["<command>", "<arg1>"] - Sets the default command for the container (only one CMD per Dockerfile)
 
-ENTRYPOINT \["<command>", "<arg1>"] - Sets the main executable (can be combined with CMD)
+ENTRYPOINT ["<command>", "<arg1>"] - Sets the main executable (can be combined with CMD)
 
-ARG <name>\[=<default>] - Defines build-time variables (different from ENV)
+ARG <name>[=<default>] - Defines build-time variables (different from ENV)
 
-VOLUME \["<path>"] - Creates a mount point for external volumes
+VOLUME ["<path>"] - Creates a mount point for external volumes
 
 ##### Important Notes:
 
@@ -46,7 +46,7 @@ RUN vs CMD: RUN executes during build, CMD executes at container runtime
 
 #### Building and Running Containers
 
-1\. Build an Image
+1. Build an Image
 
 docker build -t image-name:tag .
 
@@ -54,7 +54,7 @@ docker build -t myapp:v1 . # With tag
 
 docker build -f Dockerfile.dev . # Custom Dockerfile name
 
-2\. Run a Container
+2. Run a Container
 
 docker run image-name
 
@@ -66,11 +66,11 @@ docker run --name mycontainer image-name # Named container
 
 docker run -it image-name /bin/bash # Interactive with terminal
 
-3\. Container Management
+3. Container Management
 
 bash
 
-\# List containers
+# List containers
 
 docker ps # Running containers
 
@@ -78,7 +78,7 @@ docker ps -a # All containers
 
 docker ps -l # Last created container
 
-\# Container lifecycle
+# Container lifecycle
 
 docker start <container> # Start stopped container
 
@@ -90,7 +90,7 @@ docker rm <container> # Remove container
 
 docker rm $(docker ps -aq) # Remove all containers
 
-\# Container inspection
+# Container inspection
 
 docker logs <container> # View logs
 
@@ -102,27 +102,27 @@ docker inspect <container> # Detailed container info
 
 docker stats # Resource usage
 
-4\. Image Management
+4. Image Management
 
 bash
 
-\# List images
+# List images
 
 docker images
 
 docker image ls
 
-\# Remove images
+# Remove images
 
 docker rmi <image>
 
 docker rmi $(docker images -q) # Remove all images
 
-\# Clean up
+# Clean up
 
 docker system prune -a # Remove unused data
 
-\# Image inspection
+# Image inspection
 
 docker history <image> # Show image layers
 
