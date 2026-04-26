@@ -54,9 +54,9 @@ Result:
 This is important
 
 9. Tables
-| Name | Age |
-|------|-----|
-| Tino | 23  |
+well these are useless
+
+
 10. Checklists (very useful on GitHub)
 - [x] Done
 - [ ] Not done
