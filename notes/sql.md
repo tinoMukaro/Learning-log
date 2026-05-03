@@ -6,7 +6,7 @@ it is a querying language used to communicate with databases
 
 used to define structures, tables, schemas and constraints
 
-1. CREATE - _to create a table_
+1. CREATE - to create a table
 
 CREATE TABLE users(
 
@@ -18,7 +18,7 @@ email VARCHAR);
 
 common data types - INT, VARCHAR(n), TEXT, DATE, TIMESTAMP, BOOLEAN
 
-2. **ALTER** - _to alter/modify a table or column_
+2. **ALTER** - to alter/modify a table or column
 
 ALTER TABLE users ADD COLUMN age INT,
 
@@ -26,13 +26,13 @@ ALTER TABLE users DROP COLUMN age INT,
 
 ALTER TABLE users ALTER COLUMN name TYPE VARCHAR(150),
 
-3. DROP - _DELETE everything table and data_
+3. DROP - DELETE everything table and data
 
 DROP TABLE users;
 
 DROP DATABSE mydb;
 
-4. TRANCATE - _DELETE data inside the table_
+4. TRANCATE - DELETE data inside the table
 
 TRANCATE TABLE users;
 
@@ -55,7 +55,7 @@ VALUES(1, "TINO", "TINO@TINO.COM"),
 
 2. SELECT
 
-SELECT \* FROM users;
+SELECT * FROM users;
 
 SELECT name, email FROM users;
 
@@ -75,47 +75,47 @@ DELETE FROM users WHERE id = 1
 
 ##### **QUERIES**
 
-1. WHERE - _filters rows_
+1. WHERE - filters rows
 
-SELECT \* FROM users WHERE age > 26
+SELECT * FROM users WHERE age > 26
 
-SELECT \* FROM users WHERE name LIKE 'ti%',
+SELECT * FROM users WHERE name LIKE 'ti%',
 
 2. ORDER BY
 
-SELECT \* FROM users ORDER BY created_at DESC
+SELECT * FROM users ORDER BY createdat DESC
 
 3. LIMIT/OFFSET
 
-SELECT \* FROM users LIMIT 10 OFFSET 20
+SELECT * FROM users LIMIT 10 OFFSET 20
 
 4. AGGREGATIONS
 
-SELECT COUNT(\*) FROM USERS
+SELECT COUNT(*) FROM USERS
 
-SELECT SUM(\*) FROM USERS
+SELECT SUM(*) FROM USERS
 
 SELECT AVG(age) FROM USERS
 
-SELECT MAX(\*) FROM USERS
+SELECT MAX(*) FROM USERS
 
 5. GROUP BY
 
-SELECT age, COUNT(\*)
+SELECT age, COUNT(*)
 
 FROM users
 
 GROUP BY age
 
-6. HAVING - _filters groups_
+6. HAVING - filters groups
 
-SELECT age, COUNT(\*)
+SELECT age, COUNT(*)
 
 FROM users
 
 GROUP BY age
 
-HAVING COUNT(\*) > 2;
+HAVING COUNT(*) > 2;
 
 7. JOINS
 
@@ -133,21 +133,21 @@ FULL JOIN - everything
 
 8. SUBQUERIES
 
-SELECT \* FROM users
+SELECT * FROM users
 
-WHERE id IN (SELECT user_id FROM orders WHERE total > 100)
+WHERE id IN (SELECT userid FROM orders WHERE total > 100)
 
 9. EXIST
 
-SELECT \* FROM users u
+SELECT * FROM users u
 
-WHERE EXISTS (SELECT 1 FROM orders O WHERE o.user_id = u.id)
+WHERE EXISTS (SELECT 1 FROM orders O WHERE o.userid = u.id)
 
 10. INDEXES
 
-CREATE INDEX idx_users_email ON users(email)
+CREATE INDEX idxusersemail ON users(email)
 
-11\. TRANSACTIONS
+11. TRANSACTIONS
 
 BEGIN;
 
