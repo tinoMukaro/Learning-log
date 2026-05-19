@@ -291,3 +291,65 @@ public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 - Must be kept secure
 
 ---
+
+# DTO & Kafka
+
+## 1. DTO (Data Transfer Object)
+
+### What is it?
+
+- A simple **object** that carries data between processes (e.g., client ↔ server, layers like Controller ↔ Service).
+- Typically **no behavior** (no business logic) — only fields, getters, setters.
+- Used to **decouple** internal domain models from external APIs.
+
+### Why use DTO?
+
+- ✅ Control which data is exposed (hide sensitive fields like passwords).
+- ✅ Reduce number of network calls (aggregate multiple values into one DTO).
+- ✅ Decouple internal entities from API contracts (can change DB model without breaking clients).
+- ✅ Serialize easily to/from JSON/XML.
+
+### Example (Java):
+
+```java
+public class UserDTO {
+    private String name;
+    private String email;
+    // constructor, getters, setters
+}
+```
+
+## Apache Kafka
+
+What is it?
+Distributed event streaming platform used for high-throughput, low-latency messaging.
+
+Based on publish-subscribe model.
+
+Core Concepts:
+Concept Description
+Producer Sends messages to a topic.
+Consumer Reads messages from a topic.
+Topic Logical channel to organize messages (like a table).
+Partition Topic split into ordered logs for parallelism.
+Broker A Kafka server (stores partitions).
+Offset Unique position of a message within a partition.
+Consumer Group Multiple consumers sharing load; each partition assigned to one consumer in group.
+ZooKeeper/KRaft Manages cluster metadata (Kafka 3.x+ uses KRaft).
+Key Features:
+Durable (messages stored on disk).
+
+Fault-tolerant (replicate partitions).
+
+Scalable (add brokers/partitions).
+
+At-least-once / Exactly-once semantics configurable.
+
+Common Use Cases:
+Log aggregation.
+
+Real-time analytics (Kafka Streams, ksqlDB).
+
+Event sourcing / CDC (Change Data Capture).
+
+Decoupling microservices.
