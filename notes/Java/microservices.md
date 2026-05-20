@@ -1,4 +1,4 @@
-Java Microservices Notes
+## Java Microservices
 
 1. What Are Microservices?
 
@@ -37,6 +37,7 @@ Hard to scale
 Hard to maintain
 One bug can crash entire system
 Slow deployments
+
 Microservices
 
 Each feature is separated.
@@ -45,16 +46,20 @@ User Service
 Product Service
 Order Service
 Payment Service
+
 Advantages
 Independent deployment
 Easier scaling
 Easier maintenance
 Teams can work separately
+
 Disadvantages
 More complex setup
 Network communication issues
 Distributed debugging
-Requires DevOps knowledge 3. Main Components in Java Microservices
+Requires DevOps knowledge
+
+3. Main Components in Java Microservices
 
 Typical Spring Boot microservices ecosystem:
 
@@ -73,7 +78,9 @@ Kafka
 Redis
 Config Server
 Docker
-Monitoring tools 4. Spring Boot
+Monitoring tools
+
+4. Spring Boot
 
 Most Java microservices use:
 
@@ -89,7 +96,9 @@ public class UserServiceApplication {
 public static void main(String[] args) {
 SpringApplication.run(UserServiceApplication.class, args);
 }
-} 5. REST APIs
+}
+
+5. REST APIs
 
 Services communicate using HTTP APIs.
 
@@ -111,7 +120,9 @@ public class UserController {
         return "User " + id;
     }
 
-} 6. DTO (Data Transfer Object)
+}
+
+6. DTO (Data Transfer Object)
 
 DTOs transfer data between layers/services.
 
@@ -130,7 +141,9 @@ private String email;
 
 Instead of returning entity directly:
 
-return userDTO; 7. Entity
+return userDTO;
+
+7. Entity
 
 Represents database table.
 
@@ -145,7 +158,9 @@ public class User {
 
     private String username;
 
-} 8. Repository Layer
+}
+
+8. Repository Layer
 
 Handles database operations.
 
@@ -192,7 +207,9 @@ Cleans old builds
 Downloads dependencies
 Compiles code
 Runs tests
-Creates JAR 11. Multi-Module Projects
+Creates JAR
+
+11. Multi-Module Projects
 
 Large systems often have shared libraries.
 
@@ -210,7 +227,9 @@ Example shared items:
 DTOs
 Utility classes
 Exception handlers
-Security configs 12. API Gateway
+Security configs
+
+12. API Gateway
 
 Single entry point for all requests.
 
@@ -230,7 +249,9 @@ Popular gateways:
 
 Spring Cloud Gateway
 NGINX
-Kong 13. NGINX
+Kong
+
+13. NGINX
 
 Can act as:
 
@@ -265,7 +286,9 @@ Service names
 
 Example:
 
-@FeignClient(name = "USER-SERVICE") 15. Eureka Server
+@FeignClient(name = "USER-SERVICE")
+
+15. Eureka Server
 
 Acts like a phonebook for services.
 
@@ -292,7 +315,9 @@ public interface UserClient {
     @GetMapping("/users/{id}")
     UserDTO getUser(@PathVariable Long id);
 
-} 17. Kafka
+}
+
+17. Kafka
 
 Distributed event streaming platform.
 
@@ -310,13 +335,17 @@ Kafka
 ↓
 Notification Service
 Inventory Service
-Payment Service 18. Kafka Producer
+Payment Service
+
+18. Kafka Producer
 
 Sends messages.
 
 Example:
 
-kafkaTemplate.send("orders", order); 19. Kafka Consumer
+kafkaTemplate.send("orders", order);
+
+19. Kafka Consumer
 
 Receives messages.
 
@@ -337,7 +366,9 @@ Faster systems
 Example:
 Instead of waiting for email service:
 
-Order Service → Kafka → Email Service 21. Redis
+Order Service → Kafka → Email Service
+
+21. Redis
 
 In-memory database.
 
@@ -357,7 +388,9 @@ Database query result → Redis cache
 Benefits:
 
 Reduces DB load
-Faster responses 22. Config Server
+Faster responses
+
+22. Config Server
 
 Centralized configuration management.
 
@@ -373,7 +406,9 @@ Stores:
 
 Database URLs
 Secrets
-Environment configs 23. Profiles
+Environment configs
+
+23. Profiles
 
 Different configs for environments.
 
@@ -384,7 +419,9 @@ application-prod.properties
 
 Run:
 
--Dspring.profiles.active=dev 24. Docker
+-Dspring.profiles.active=dev
+
+24. Docker
 
 Containerization platform.
 
@@ -406,7 +443,9 @@ docker build -t user-service .
 
 Run:
 
-docker run -p 8080:8080 user-service 25. Docker Compose
+docker run -p 8080:8080 user-service
+
+25. Docker Compose
 
 Runs multiple containers together.
 
@@ -434,8 +473,10 @@ One database per service
 Advantages:
 
 Loose coupling
-Independent scaling 27. Communication Types
-Synchronous
+Independent scaling
+
+27. Communication Types
+    Synchronous
 
 Waits for response.
 
@@ -450,7 +491,9 @@ Does not wait.
 Example:
 
 Kafka
-RabbitMQ 28. Load Balancing
+RabbitMQ
+
+28. Load Balancing
 
 Distributes traffic.
 
@@ -465,7 +508,9 @@ Load Balancer
 Improves:
 
 Scalability
-Availability 29. Circuit Breaker
+Availability
+
+29. Circuit Breaker
 
 Prevents cascading failures.
 
@@ -475,7 +520,9 @@ Stop repeated calls
 
 Popular tool:
 
-Resilience4j 30. Logging
+Resilience4j
+
+30. Logging
 
 Microservices generate massive logs.
 
@@ -487,7 +534,9 @@ Loki
 
 Basic logging:
 
-log.info("User created"); 31. Reading Java Logs
+log.info("User created");
+
+31. Reading Java Logs
 
 Focus on:
 
@@ -529,6 +578,7 @@ Wrong credentials or DB offline.
     MySQL 3306
     Redis 6379
     MinIO 9000
+
 34. MinIO
 
 Object storage system.
@@ -557,7 +607,9 @@ OAuth2
 
 Flow:
 
-Login → Token → Access APIs 36. JWT
+Login → Token → Access APIs
+
+36. JWT
 
 JSON Web Token.
 
@@ -569,14 +621,18 @@ Expiry
 
 Example:
 
-Authorization: Bearer token 37. Spring Security
+Authorization: Bearer token
+
+37. Spring Security
 
 Handles:
 
 Authentication
 Authorization
 Roles
-Protected endpoints 38. Microservices Deployment Flow
+Protected endpoints
+
+38. Microservices Deployment Flow
 
 Typical workflow:
 
@@ -588,7 +644,9 @@ CI/CD Pipeline
 ↓
 Docker Build
 ↓
-Deploy Server/Kubernetes 39. CI/CD
+Deploy Server/Kubernetes
+
+39. CI/CD
 
 Continuous Integration / Deployment.
 
@@ -601,7 +659,9 @@ GitLab CI
 Purpose:
 
 Automatic testing
-Automatic deployment 40. Kubernetes (K8s)
+Automatic deployment
+
+40. Kubernetes (K8s)
 
 Container orchestration platform.
 
@@ -631,6 +691,7 @@ Checks if service is alive.
     @Repository
     Dependency Injection
     @Autowired
+
 43. Dependency Injection
 
 Spring automatically provides objects.
@@ -638,13 +699,17 @@ Spring automatically provides objects.
 Example:
 
 @Autowired
-private UserService userService; 44. Environment Variables
+private UserService userService;
+
+44. Environment Variables
 
 Used for secrets/configs.
 
 Example:
 
-DB_PASSWORD=${DB_PASSWORD} 45. Why Microservices Are Hard
+DB_PASSWORD=${DB_PASSWORD}
+
+45. Why Microservices Are Hard
 
 Challenges:
 
@@ -652,18 +717,22 @@ Distributed systems
 Debugging across services
 Network failures
 Monitoring
-Deployment complexity 46. Typical Real-World Architecture
-Frontend
-↓
-NGINX / API Gateway
-↓
-Microservices
-├── User Service
-├── Product Service
-├── Order Service
-└── Payment Service
-↓
-Kafka / Redis / Databases 47. What Juniors Should Focus On
+Deployment complexity
+
+46. Typical Real-World Architecture
+    Frontend
+    ↓
+    NGINX / API Gateway
+    ↓
+    Microservices
+    ├── User Service
+    ├── Product Service
+    ├── Order Service
+    └── Payment Service
+    ↓
+    Kafka / Redis / Databases
+
+47. What Juniors Should Focus On
 
 Learn in this order:
 
@@ -676,24 +745,30 @@ Microservices basics
 API Gateway
 Kafka
 Docker
-Security 48. Important Commands
-Maven
-mvn clean install
-Run Spring Boot
-mvn spring-boot:run
-Docker
-docker ps
-docker images
-docker logs container_id 49. Typical Folder Structure
-src/main/java
-├── controller
-├── service
-├── repository
-├── dto
-├── entity
-├── config
-├── exception
-└── security 50. Final Big Picture
+Security
+
+48. Important Commands
+    Maven
+    mvn clean install
+    Run Spring Boot
+    mvn spring-boot:run
+    Docker
+    docker ps
+    docker images
+    docker logs container_id
+
+49. Typical Folder Structure
+    src/main/java
+    ├── controller
+    ├── service
+    ├── repository
+    ├── dto
+    ├── entity
+    ├── config
+    ├── exception
+    └── security
+
+50. Final Big Picture
 
 Microservices are:
 
