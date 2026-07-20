@@ -842,3 +842,11 @@ of if theres no parameters you can skip the {} and it becomes,
 Greeting = () -> system.out.println("hello");
 
 ```
+
+if its returning something
+
+Calculator calc = (a,b) -> {
+return a+b;
+};
+
+or shorter: Calculator calc = (a,b) -> a+b;
