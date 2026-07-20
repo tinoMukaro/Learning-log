@@ -805,3 +805,40 @@ String access = switch (role) {
 
 This is cleaner and reduces mistakes with missing break.
 ```
+
+## interfaces
+
+its a blueprint for creating classes,
+cant instantiate, rather you shoukd impliment it
+types
+
+1. Normal interface
+   this can have multiple methods, and its a contract if you impliment me, you have to provide the methods too
+
+2. Functional Interface
+   this one is intended to have 1 method only and usually annotated with
+   @FunctionalInterface
+
+##lambda
+is a short way of implimenting a functional interface,instead of creating a whole class, then instantiating it just to call one method. use lambda
+anatomy
+
+```java
+Greeting greeting = new Greeting(){
+    @Override
+    public void sayHello(){
+        system.out.println("hello")
+    }
+}
+normal way of impl an interface with sayHello
+
+with lamda it becomes
+
+Greeting = () -> {
+    system.out.println("hello");
+}
+
+of if theres no parameters you can skip the {} and it becomes,
+Greeting = () -> system.out.println("hello");
+
+```
